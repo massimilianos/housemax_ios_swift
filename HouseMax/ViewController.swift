@@ -19,19 +19,13 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var strData = "";
+        let internetURL = NSURL(string:"http://massimilianos.ns0.it:82/temperatureRead/0/0")
         
-        let url = NSURL(string: "http://massimilianos.ns0.it:82/temperatureRead/0/0")
+        let sensorURL = NSURLRequest(URL: internetURL!)
+        let sensorData = NSURLConnection(request: sensorURL, delegate: nil, startImmediately: true)
+        let strSensorData = NSString(data: sensorData, encoding: NSUTF8StringEncoding)
         
-        let session = NSURLSession.sharedSession()
-            
-        let dataTask = session.dataTaskWithURL(url!, completionHandler: {(data: NSData!, response:NSURLResponse!,
-            error: NSError!) -> Void in
-            
-            strData = NSString(data: data, encoding: NSUTF8StringEncoding)!
-        })
-        
-        self.lblTemperatura.text = strData
+        self.lblTemperatura.text = strSensorData
     }
 
     override func didReceiveMemoryWarning() {
