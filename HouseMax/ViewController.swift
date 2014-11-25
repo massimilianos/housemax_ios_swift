@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        var codeView = CodeViewController(_output: "MASSIMILIANO")
+        var codeView = CodeViewController(_output: "DAJEEEEEE!!!")
     
         codeView.downloadHTML("http://massimilianos.ns0.it:82/temperatureRead/0/0")
         println("Immediate \(codeView.output)")
