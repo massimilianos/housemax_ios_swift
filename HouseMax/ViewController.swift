@@ -18,9 +18,16 @@ class ViewController: UIViewController {
     @IBOutlet weak var indicatorUpdateHumidity: UIActivityIndicatorView!
 
     @IBOutlet weak var btnUpdateDHT11: UIButton!
-
+    
+    @IBOutlet weak var imgModalita: UIButton!
+    
+    @IBOutlet weak var txtTempControllo: UITextField!
+    @IBOutlet weak var lblTempControllo: UILabel!
+    @IBOutlet weak var indicatorTempControllo: UIActivityIndicatorView!
+    @IBOutlet weak var btnSetTempControllo: UIButton!
+    
     @IBOutlet weak var swcManualControl: UISwitch!
-
+    
     @IBOutlet weak var swcRelay1: UISwitch!
     @IBOutlet weak var swcRelay2: UISwitch!
     @IBOutlet weak var swcRelay3: UISwitch!
@@ -47,6 +54,24 @@ class ViewController: UIViewController {
     func HTTPGet(url: String, callback: (String, String?) -> Void) {
         var request = NSMutableURLRequest(URL: NSURL(string: url)!)
         HTTPsendRequest(request, callback)
+    }
+    
+    func impostaModalita(modalita: NSString){
+        var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?SetModalita="
+        
+        if (modalita == "0") {
+            self.imgModalita.setImage(UIImage(named:"Winter"),forState:UIControlState.Normal)
+            self.lblTempControllo.text = "Min."
+        } else {
+            self.imgModalita.setImage(UIImage(named:"Summer"),forState:UIControlState.Normal)
+            self.lblTempControllo.text = "Max."
+        }
+        
+        URL = URL + modalita
+        
+        HTTPGet(URL) {
+            (data: String, error: String?) -> Void in
+        }
     }
 
     @IBAction func pushUpdateDHT11(sender: AnyObject) {
@@ -109,12 +134,47 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func changeModalita(sender: AnyObject) {
+        var modalita = ""
+        
+        HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita") {
+            (data: String, error: String?) -> Void in
+            if data == "0" {
+                modalita += "1"
+            } else {
+                modalita += "0"
+            }
+        }
+        
+        self.impostaModalita(modalita)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         self.indicatorUpdateTemperature.hidden = true
         self.indicatorUpdateHumidity.hidden = true
+/*
+        HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita") {
+            (data: String, error: String?) -> Void in
+            self.impostaModalita(data.toInt()!)
+        }
+*/
+        self.indicatorTempControllo.hidden = false
+        self.indicatorTempControllo.startAnimating()
+        
+        HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadTempControl") {
+            (data: String, error: String?) -> Void in
+            if (error != nil) {
+                self.txtTempControllo.text = "ERR"
+            } else {
+                self.txtTempControllo.text = data
+            }
+            
+            self.indicatorTempControllo.stopAnimating()
+            self.indicatorTempControllo.hidden = true
+        }
     }
 
     override func didReceiveMemoryWarning() {
