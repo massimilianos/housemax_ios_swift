@@ -26,6 +26,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B42E83F61A24BD71003CDBD6 /* ViewController.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = ViewController.playground; sourceTree = "<group>"; };
 		B4600E291A20A461006825FE /* HouseMax.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HouseMax.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4600E2D1A20A461006825FE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B4600E2E1A20A461006825FE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +84,7 @@
 				B4600E351A20A461006825FE /* Images.xcassets */,
 				B4600E371A20A461006825FE /* LaunchScreen.xib */,
 				B4600E2C1A20A461006825FE /* Supporting Files */,
+				B42E83F61A24BD71003CDBD6 /* ViewController.playground */,
 			);
 			path = HouseMax;
 			sourceTree = "<group>";
