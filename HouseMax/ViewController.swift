@@ -56,6 +56,15 @@ class ViewController: UIViewController {
         HTTPsendRequest(request, callback)
     }
     
+    func inviaRichiestaHTTP(URL: String) -> String {
+        var errore: NSErrorPointer = nil
+        
+        let internetURL = NSURL(string: URL)
+        var datastring = NSString(contentsOfURL: internetURL!, usedEncoding: nil, error: errore)
+        
+        return(datastring)!
+    }
+    
     func impostaModalita(modalita: NSString){
         var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?SetModalita="
         
@@ -73,15 +82,31 @@ class ViewController: UIViewController {
         print(URL)
         println("'")
         
+        var data = inviaRichiestaHTTP(URL)
+/*
         HTTPGet(URL) {
             (data: String, error: String?) -> Void in
         }
+*/
     }
 
     @IBAction func pushUpdateDHT11(sender: AnyObject) {
         self.lblTemperatura.hidden = true
         self.indicatorUpdateTemperature.hidden = false
         self.indicatorUpdateTemperature.startAnimating()
+        
+        var dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
+        
+        print("pushUpdateDHT11 TemperatureRead: '")
+        print(dataTemperatureRead)
+        println("'")
+        
+        self.indicatorUpdateTemperature.stopAnimating()
+        self.indicatorUpdateTemperature.hidden = true
+        self.lblTemperatura.hidden = false
+        
+        self.lblTemperatura.text = dataTemperatureRead + "°"
+/*
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead") {
             (data: String, error: String?) -> Void in
             
@@ -98,10 +123,23 @@ class ViewController: UIViewController {
                 self.lblTemperatura.text = data + "°"
             }
         }
-        
+*/
         self.lblUmidita.hidden = true
         self.indicatorUpdateHumidity.hidden = false
         self.indicatorUpdateHumidity.startAnimating()
+        
+        var dataHumidityRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead")
+        
+        print("pushUpdateDHT11 HumidityRead: '")
+        print(dataHumidityRead)
+        println("'")
+        
+        self.lblUmidita.hidden = false
+        self.indicatorUpdateHumidity.stopAnimating()
+        self.indicatorUpdateHumidity.hidden = true
+        
+        self.lblUmidita.text = dataHumidityRead + "%"
+/*
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead") {
             (data: String, error: String?) -> Void in
             
@@ -118,6 +156,7 @@ class ViewController: UIViewController {
                 self.lblUmidita.text = data + "%"
             }
         }
+*/
     }
     
     @IBAction func swcManualControlOnOff(sender: AnyObject) {
@@ -143,12 +182,27 @@ class ViewController: UIViewController {
             println("DISATTIVATO CONTROLLO MANUALE!")
         }
         
+        var data = inviaRichiestaHTTP(URL)
+/*
         HTTPGet(URL) {
             (data: String, error: String?) -> Void in
         }
+*/
     }
     
     @IBAction func changeModalita(sender: AnyObject) {
+        var data = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
+        
+        print("changeModalita: '")
+        print(data)
+        println("'")
+        
+        if data == "0" {
+            self.impostaModalita("1")
+        } else {
+            self.impostaModalita("0")
+        }
+/*
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita") {
             (data: String, error: String?) -> Void in
             
@@ -161,7 +215,8 @@ class ViewController: UIViewController {
             } else {
                 self.impostaModalita("0")
             }
-        }        
+        }
+*/
     }
     
     @IBAction func pushSetTempControllo(sender: AnyObject) {
@@ -173,10 +228,12 @@ class ViewController: UIViewController {
         print(URL)
         println("'")
         
+        var data = inviaRichiestaHTTP(URL)
+/*
         HTTPGet(URL) {
             (data: String, error: String?) -> Void in
         }
-
+*/
     }
     
     override func viewDidLoad() {
@@ -186,6 +243,14 @@ class ViewController: UIViewController {
         self.indicatorUpdateTemperature.hidden = true
         self.indicatorUpdateHumidity.hidden = true
 
+        var dataReadModalita = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
+        
+        print("viewDidLoad ReadModalita: '")
+        print(dataReadModalita)
+        println("'")
+        
+        self.impostaModalita(dataReadModalita)
+/*
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita") {
             (data: String, error: String?) -> Void in
             
@@ -195,10 +260,21 @@ class ViewController: UIViewController {
             
             self.impostaModalita(data)
         }
-
+*/
         self.indicatorTempControllo.hidden = false
         self.indicatorTempControllo.startAnimating()
+
+        var dataTempControllo = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadTempControl")
         
+        print("viewDidLoad TempControllo: '")
+        print(dataTempControllo)
+        println("'")
+        
+        self.txtTempControllo.text = dataTempControllo
+        
+        self.indicatorTempControllo.stopAnimating()
+        self.indicatorTempControllo.hidden = true
+/*
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadTempControl") {
             (data: String, error: String?) -> Void in
             
@@ -211,10 +287,11 @@ class ViewController: UIViewController {
             } else {
                 self.txtTempControllo.text = data
             }
-            
+
             self.indicatorTempControllo.stopAnimating()
             self.indicatorTempControllo.hidden = true
         }
+*/
     }
 
     override func didReceiveMemoryWarning() {
