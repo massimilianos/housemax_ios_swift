@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -67,15 +67,6 @@
                                     <action selector="pushUpdateDHT11:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tTt-3H-ayK"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxS-fJ-6tt">
-                                <rect key="frame" x="236" y="218" width="68" height="30"/>
-                                <state key="normal" title="IMPOSTA">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pushUpdateDHT11:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6ie-Ft-Hti"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOUSEMAX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZx-ox-yh2">
                                 <rect key="frame" x="0.0" y="46" width="320" height="40"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
@@ -124,7 +115,7 @@
                                 <rect key="frame" x="236" y="427" width="51" height="31"/>
                             </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGU-E3-5hR">
-                                <rect key="frame" x="138" y="218" width="45" height="30"/>
+                                <rect key="frame" x="136" y="218" width="48" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                             </textField>
@@ -140,12 +131,21 @@
                                 </connections>
                             </switch>
                             <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qAe-fE-Hmn">
-                                <rect key="frame" x="138" y="168" width="45" height="42"/>
+                                <rect key="frame" x="136" y="168" width="48" height="47"/>
                                 <state key="normal" title="Button" image="Winter">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="changeModalita:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nyt-39-5Hn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxS-fJ-6tt">
+                                <rect key="frame" x="236" y="218" width="68" height="30"/>
+                                <state key="normal" title="IMPOSTA">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushSetTempControllo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wgg-bS-mEn"/>
                                 </connections>
                             </button>
                         </subviews>

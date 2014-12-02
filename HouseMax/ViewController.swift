@@ -69,6 +69,10 @@ class ViewController: UIViewController {
         
         URL = URL + modalita
         
+        print("impostaModalita URL: '")
+        print(URL)
+        println("'")
+        
         HTTPGet(URL) {
             (data: String, error: String?) -> Void in
         }
@@ -80,6 +84,11 @@ class ViewController: UIViewController {
         self.indicatorUpdateTemperature.startAnimating()
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead") {
             (data: String, error: String?) -> Void in
+            
+            print("pushUpdateDHT11 TemperatureRead: '")
+            print(data)
+            println("'")
+            
             self.indicatorUpdateTemperature.stopAnimating()
             self.indicatorUpdateTemperature.hidden = true
             self.lblTemperatura.hidden = false
@@ -95,6 +104,11 @@ class ViewController: UIViewController {
         self.indicatorUpdateHumidity.startAnimating()
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead") {
             (data: String, error: String?) -> Void in
+            
+            print("pushUpdateDHT11 HumidityRead: '")
+            print(data)
+            println("'")
+            
             self.lblUmidita.hidden = false
             self.indicatorUpdateHumidity.stopAnimating()
             self.indicatorUpdateHumidity.hidden = true
@@ -135,18 +149,34 @@ class ViewController: UIViewController {
     }
     
     @IBAction func changeModalita(sender: AnyObject) {
-        var modalita = ""
-        
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita") {
             (data: String, error: String?) -> Void in
+            
+            print("changeModalita: '")
+            print(data)
+            println("'")
+            
             if data == "0" {
-                modalita += "1"
+                self.impostaModalita("1")
             } else {
-                modalita += "0"
+                self.impostaModalita("0")
             }
-        }
+        }        
+    }
+    
+    @IBAction func pushSetTempControllo(sender: AnyObject) {
+        var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?SetTempControl="
         
-        self.impostaModalita(modalita)
+        URL = URL + self.txtTempControllo.text
+        
+        print("pushSetTempControllo URL: '")
+        print(URL)
+        println("'")
+        
+        HTTPGet(URL) {
+            (data: String, error: String?) -> Void in
+        }
+
     }
     
     override func viewDidLoad() {
@@ -155,17 +185,27 @@ class ViewController: UIViewController {
         
         self.indicatorUpdateTemperature.hidden = true
         self.indicatorUpdateHumidity.hidden = true
-/*
+
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita") {
             (data: String, error: String?) -> Void in
-            self.impostaModalita(data.toInt()!)
+            
+            print("viewDidLoad ReadModalita: '")
+            print(data)
+            println("'")
+            
+            self.impostaModalita(data)
         }
-*/
+
         self.indicatorTempControllo.hidden = false
         self.indicatorTempControllo.startAnimating()
         
         HTTPGet("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadTempControl") {
             (data: String, error: String?) -> Void in
+            
+            print("viewDidLoad TempControllo: '")
+            print(data)
+            println("'")
+            
             if (error != nil) {
                 self.txtTempControllo.text = "ERR"
             } else {
@@ -180,6 +220,11 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func textFieldShouldReturn(textField: UITextField!) -> Bool {
+        self.view.endEditing(true);
+        return false;
     }
 
 }
