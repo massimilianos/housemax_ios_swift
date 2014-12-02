@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
@@ -84,12 +84,21 @@
                             </activityIndicatorView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kzv-bc-ytG">
                                 <rect key="frame" x="236" y="310" width="51" height="31"/>
+                                <connections>
+                                    <action selector="swcRelay1OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="wiQ-mE-qha"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MnU-Gs-sua">
                                 <rect key="frame" x="236" y="349" width="51" height="31"/>
+                                <connections>
+                                    <action selector="swcRelay2OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="wE9-Ai-Pzf"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DMy-Nn-rBq">
                                 <rect key="frame" x="236" y="388" width="51" height="31"/>
+                                <connections>
+                                    <action selector="swcRelay3OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="Vsb-fz-xu4"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Interruttore 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mdl-68-3zq">
                                 <rect key="frame" x="16" y="315" width="202" height="21"/>
@@ -113,6 +122,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-G9-xoD">
                                 <rect key="frame" x="236" y="427" width="51" height="31"/>
+                                <connections>
+                                    <action selector="swcRelay4OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="XZ7-sh-BYs"/>
+                                </connections>
                             </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="DGU-E3-5hR">
                                 <rect key="frame" x="136" y="218" width="48" height="30"/>

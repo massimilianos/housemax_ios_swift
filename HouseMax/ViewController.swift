@@ -127,6 +127,70 @@ class ViewController: UIViewController {
         var data = inviaRichiestaHTTP(URL)
     }
     
+    @IBAction func swcRelay1OnOff(sender: AnyObject) {
+        var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?Relay1="
+        
+        if (self.swcRelay1.on) {
+            URL = URL + "ON"
+        } else {
+            URL = URL + "OFF"
+        }
+        
+        print("swcRelay1OnOff URL: '")
+        print(URL)
+        println("'")
+        
+        var data = inviaRichiestaHTTP(URL)
+    }
+    
+    @IBAction func swcRelay2OnOff(sender: AnyObject) {
+        var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?Relay2="
+        
+        if (self.swcRelay2.on) {
+            URL = URL + "ON"
+        } else {
+            URL = URL + "OFF"
+        }
+        
+        print("swcRelay2OnOff URL: '")
+        print(URL)
+        println("'")
+        
+        var data = inviaRichiestaHTTP(URL)
+    }
+    
+    @IBAction func swcRelay3OnOff(sender: AnyObject) {
+        var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?Relay3="
+        
+        if (self.swcRelay3.on) {
+            URL = URL + "ON"
+        } else {
+            URL = URL + "OFF"
+        }
+        
+        print("swcRelay3OnOff URL: '")
+        print(URL)
+        println("'")
+        
+        var data = inviaRichiestaHTTP(URL)
+    }
+    
+    @IBAction func swcRelay4OnOff(sender: AnyObject) {
+        var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?Relay4="
+        
+        if (self.swcRelay4.on) {
+            URL = URL + "ON"
+        } else {
+            URL = URL + "OFF"
+        }
+        
+        print("swcRelay4OnOff URL: '")
+        print(URL)
+        println("'")
+        
+        var data = inviaRichiestaHTTP(URL)
+    }
+    
     @IBAction func changeModalita(sender: AnyObject) {
         var data = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
         
@@ -151,6 +215,15 @@ class ViewController: UIViewController {
         println("'")
         
         var data = inviaRichiestaHTTP(URL)
+        
+        // LEGGO IL VALORE DELLA TEMPERATURA
+        var dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
+        
+        print("pushSetTempControllo TemperatureRead: '")
+        print(dataTemperatureRead)
+        println("'")
+        
+        self.lblTemperatura.text = dataTemperatureRead + "°"
     }
     
     override func viewDidLoad() {
@@ -183,6 +256,40 @@ class ViewController: UIViewController {
         
         self.indicatorTempControllo.stopAnimating()
         self.indicatorTempControllo.hidden = true
+        
+        // LEGGO IL VALORE DELLA TEMPERATURA
+        self.lblTemperatura.hidden = true
+        self.indicatorUpdateTemperature.hidden = false
+        self.indicatorUpdateTemperature.startAnimating()
+        
+        var dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
+        
+        print("pushUpdateDHT11 TemperatureRead: '")
+        print(dataTemperatureRead)
+        println("'")
+        
+        self.indicatorUpdateTemperature.stopAnimating()
+        self.indicatorUpdateTemperature.hidden = true
+        self.lblTemperatura.hidden = false
+        
+        self.lblTemperatura.text = dataTemperatureRead + "°"
+        
+        // LEGGO IL VALORE DELL'UMIDITA'
+        self.lblUmidita.hidden = true
+        self.indicatorUpdateHumidity.hidden = false
+        self.indicatorUpdateHumidity.startAnimating()
+        
+        var dataHumidityRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead")
+        
+        print("pushUpdateDHT11 HumidityRead: '")
+        print(dataHumidityRead)
+        println("'")
+        
+        self.lblUmidita.hidden = false
+        self.indicatorUpdateHumidity.stopAnimating()
+        self.indicatorUpdateHumidity.hidden = true
+        
+        self.lblUmidita.text = dataHumidityRead + "%"
     }
 
     override func didReceiveMemoryWarning() {
