@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
+        <deployment version="1552" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <scenes>
@@ -9,8 +10,8 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="HouseMax" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                        <viewControllerLayoutGuide type="top" id="LkD-uE-ZEi"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZHk-Lw-GZ0"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -58,13 +59,13 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGq-HF-GXT">
-                                <rect key="frame" x="223" y="122" width="81" height="30"/>
-                                <state key="normal" title="AGGIORNA">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6WV-br-FJf">
+                                <rect key="frame" x="265" y="136" width="28" height="28"/>
+                                <state key="normal" image="Reload">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="pushUpdateDHT11:" destination="BYZ-38-t0r" eventType="touchUpInside" id="tTt-3H-ayK"/>
+                                    <action selector="pushUpdateDHT11Humidity:" destination="BYZ-38-t0r" eventType="touchUpInside" id="3a4-PW-o2p"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="HOUSEMAX" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cZx-ox-yh2">
@@ -83,19 +84,19 @@
                                 <rect key="frame" x="150" y="223" width="20" height="20"/>
                             </activityIndicatorView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Kzv-bc-ytG">
-                                <rect key="frame" x="236" y="310" width="51" height="31"/>
+                                <rect key="frame" x="255" y="310" width="51" height="31"/>
                                 <connections>
                                     <action selector="swcRelay1OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="wiQ-mE-qha"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="MnU-Gs-sua">
-                                <rect key="frame" x="236" y="349" width="51" height="31"/>
+                                <rect key="frame" x="255" y="349" width="51" height="31"/>
                                 <connections>
                                     <action selector="swcRelay2OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="wE9-Ai-Pzf"/>
                                 </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="DMy-Nn-rBq">
-                                <rect key="frame" x="236" y="388" width="51" height="31"/>
+                                <rect key="frame" x="255" y="388" width="51" height="31"/>
                                 <connections>
                                     <action selector="swcRelay3OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="Vsb-fz-xu4"/>
                                 </connections>
@@ -121,7 +122,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KOJ-G9-xoD">
-                                <rect key="frame" x="236" y="427" width="51" height="31"/>
+                                <rect key="frame" x="255" y="427" width="51" height="31"/>
                                 <connections>
                                     <action selector="swcRelay4OnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="XZ7-sh-BYs"/>
                                 </connections>
@@ -137,7 +138,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="P5V-2p-mOI">
-                                <rect key="frame" x="236" y="268" width="51" height="31"/>
+                                <rect key="frame" x="255" y="268" width="51" height="31"/>
                                 <connections>
                                     <action selector="swcManualControlOnOff:" destination="BYZ-38-t0r" eventType="valueChanged" id="ieX-dB-Xd6"/>
                                 </connections>
@@ -152,12 +153,21 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wxS-fJ-6tt">
-                                <rect key="frame" x="236" y="218" width="68" height="30"/>
-                                <state key="normal" title="IMPOSTA">
+                                <rect key="frame" x="257" y="217" width="45" height="30"/>
+                                <state key="normal" title="OK">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="pushSetTempControllo:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Wgg-bS-mEn"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rGq-HF-GXT">
+                                <rect key="frame" x="265" y="107" width="28" height="28"/>
+                                <state key="normal" image="Reload">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pushUpdateDHT11Temperature:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ngD-n5-vPl"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -187,6 +197,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Reload" width="128" height="128"/>
         <image name="Winter" width="64" height="64"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

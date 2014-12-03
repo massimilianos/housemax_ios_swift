@@ -65,7 +65,7 @@ class ViewController: UIViewController {
         var data = inviaRichiestaHTTP(URL)
     }
 
-    @IBAction func pushUpdateDHT11(sender: AnyObject) {
+    @IBAction func pushUpdateDHT11Temperature(sender: AnyObject) {
         // LEGGO IL VALORE DELLA TEMPERATURA
         self.lblTemperatura.hidden = true
         self.indicatorUpdateTemperature.hidden = false
@@ -82,7 +82,9 @@ class ViewController: UIViewController {
         self.lblTemperatura.hidden = false
         
         self.lblTemperatura.text = dataTemperatureRead + "°"
-
+    }
+    
+    @IBAction func pushUpdateDHT11Humidity(sender: AnyObject) {
         // LEGGO IL VALORE DELL'UMIDITA'
         self.lblUmidita.hidden = true
         self.indicatorUpdateHumidity.hidden = false
