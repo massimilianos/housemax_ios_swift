@@ -259,39 +259,10 @@ class ViewController: UIViewController {
         self.indicatorTempControllo.stopAnimating()
         self.indicatorTempControllo.hidden = true
         
-        // LEGGO IL VALORE DELLA TEMPERATURA
-        self.lblTemperatura.hidden = true
-        self.indicatorUpdateTemperature.hidden = false
-        self.indicatorUpdateTemperature.startAnimating()
-        
-        var dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
-        
-        print("pushUpdateDHT11 TemperatureRead: '")
-        print(dataTemperatureRead)
-        println("'")
-        
-        self.indicatorUpdateTemperature.stopAnimating()
-        self.indicatorUpdateTemperature.hidden = true
-        self.lblTemperatura.hidden = false
-        
-        self.lblTemperatura.text = dataTemperatureRead + "°"
-        
-        // LEGGO IL VALORE DELL'UMIDITA'
-        self.lblUmidita.hidden = true
-        self.indicatorUpdateHumidity.hidden = false
-        self.indicatorUpdateHumidity.startAnimating()
-        
-        var dataHumidityRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead")
-        
-        print("pushUpdateDHT11 HumidityRead: '")
-        print(dataHumidityRead)
-        println("'")
-        
-        self.lblUmidita.hidden = false
-        self.indicatorUpdateHumidity.stopAnimating()
-        self.indicatorUpdateHumidity.hidden = true
-        
-        self.lblUmidita.text = dataHumidityRead + "%"
+        // LEGGO IL VALORE DELLA TEMPERATURA AD INTERVALLI REGOLARI
+        NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "pushUpdateDHT11Temperature:", userInfo: nil, repeats: true)
+        // LEGGO IL VALORE DELL'UMIDITA' AD INTERVALLI REGOLARI
+        NSTimer.scheduledTimerWithTimeInterval(3.0, target: self, selector: "pushUpdateDHT11Humidity:", userInfo: nil, repeats: true)
     }
 
     override func didReceiveMemoryWarning() {
