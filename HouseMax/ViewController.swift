@@ -37,12 +37,18 @@ class ViewController: UIViewController {
     let arduinoPort = "82"
     
     func inviaRichiestaHTTP(URL: String) -> String {
-        var errore: NSErrorPointer = nil
+        let errore: NSErrorPointer = nil
         
         let internetURL = NSURL(string: URL)
-        var datastring = NSString(contentsOfURL: internetURL!, usedEncoding: nil, error: errore)
+        var datastring: NSString?
+        do {
+            datastring = try NSString(contentsOfURL: internetURL!, usedEncoding: nil)
+        } catch let error as NSError {
+            errore.memory = error
+            datastring = nil
+        }
         
-        return(datastring)!
+        return(datastring)! as String
     }
     
     func impostaModalita(modalita: NSString){
@@ -56,13 +62,13 @@ class ViewController: UIViewController {
             self.lblTempControllo.text = "Max."
         }
         
-        URL = URL + modalita
+        URL = URL + (modalita as String)
         
-        print("impostaModalita URL: '")
-        print(URL)
-        println("'")
+        print("impostaModalita URL: '", terminator: "")
+        print(URL, terminator: "")
+        print("'")
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
     }
 
     @IBAction func pushUpdateDHT11Temperature(sender: AnyObject) {
@@ -71,11 +77,11 @@ class ViewController: UIViewController {
         self.indicatorUpdateTemperature.hidden = false
         self.indicatorUpdateTemperature.startAnimating()
         
-        var dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
+        let dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
         
-        print("pushUpdateDHT11 TemperatureRead: '")
-        print(dataTemperatureRead)
-        println("'")
+        print("pushUpdateDHT11 TemperatureRead: '", terminator: "")
+        print(dataTemperatureRead, terminator: "")
+        print("'")
         
         self.indicatorUpdateTemperature.stopAnimating()
         self.indicatorUpdateTemperature.hidden = true
@@ -90,11 +96,11 @@ class ViewController: UIViewController {
         self.indicatorUpdateHumidity.hidden = false
         self.indicatorUpdateHumidity.startAnimating()
         
-        var dataHumidityRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead")
+        let dataHumidityRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?HumidityRead")
         
-        print("pushUpdateDHT11 HumidityRead: '")
-        print(dataHumidityRead)
-        println("'")
+        print("pushUpdateDHT11 HumidityRead: '", terminator: "")
+        print(dataHumidityRead, terminator: "")
+        print("'")
         
         self.lblUmidita.hidden = false
         self.indicatorUpdateHumidity.stopAnimating()
@@ -114,7 +120,7 @@ class ViewController: UIViewController {
             
             URL = URL + "ON"
             
-            println("ATTIVATO CONTROLLO MANUALE!")
+            print("ATTIVATO CONTROLLO MANUALE!")
         } else {
             self.swcRelay1.enabled = false;
             self.swcRelay2.enabled = false;
@@ -123,10 +129,10 @@ class ViewController: UIViewController {
             
             URL = URL + "OFF"
             
-            println("DISATTIVATO CONTROLLO MANUALE!")
+            print("DISATTIVATO CONTROLLO MANUALE!")
         }
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
     }
     
     @IBAction func swcRelay1OnOff(sender: AnyObject) {
@@ -138,11 +144,11 @@ class ViewController: UIViewController {
             URL = URL + "OFF"
         }
         
-        print("swcRelay1OnOff URL: '")
-        print(URL)
-        println("'")
+        print("swcRelay1OnOff URL: '", terminator: "")
+        print(URL, terminator: "")
+        print("'")
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
     }
     
     @IBAction func swcRelay2OnOff(sender: AnyObject) {
@@ -154,11 +160,11 @@ class ViewController: UIViewController {
             URL = URL + "OFF"
         }
         
-        print("swcRelay2OnOff URL: '")
-        print(URL)
-        println("'")
+        print("swcRelay2OnOff URL: '", terminator: "")
+        print(URL, terminator: "")
+        print("'")
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
     }
     
     @IBAction func swcRelay3OnOff(sender: AnyObject) {
@@ -170,11 +176,11 @@ class ViewController: UIViewController {
             URL = URL + "OFF"
         }
         
-        print("swcRelay3OnOff URL: '")
-        print(URL)
-        println("'")
+        print("swcRelay3OnOff URL: '", terminator: "")
+        print(URL, terminator: "")
+        print("'")
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
     }
     
     @IBAction func swcRelay4OnOff(sender: AnyObject) {
@@ -186,19 +192,19 @@ class ViewController: UIViewController {
             URL = URL + "OFF"
         }
         
-        print("swcRelay4OnOff URL: '")
-        print(URL)
-        println("'")
+        print("swcRelay4OnOff URL: '", terminator: "")
+        print(URL, terminator: "")
+        print("'")
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
     }
     
     @IBAction func changeModalita(sender: AnyObject) {
-        var data = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
+        let data = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
         
-        print("changeModalita: '")
-        print(data)
-        println("'")
+        print("changeModalita: '", terminator: "")
+        print(data, terminator: "")
+        print("'")
         
         if data == "0" {
             self.impostaModalita("1")
@@ -210,20 +216,20 @@ class ViewController: UIViewController {
     @IBAction func pushSetTempControllo(sender: AnyObject) {
         var URL = "http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?SetTempControl="
         
-        URL = URL + self.txtTempControllo.text
+        URL = URL + self.txtTempControllo.text!
         
-        print("pushSetTempControllo URL: '")
-        print(URL)
-        println("'")
+        print("pushSetTempControllo URL: '", terminator: "")
+        print(URL, terminator: "")
+        print("'")
         
-        var data = inviaRichiestaHTTP(URL)
+        _ = inviaRichiestaHTTP(URL)
         
         // LEGGO IL VALORE DELLA TEMPERATURA
-        var dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
+        let dataTemperatureRead = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?TemperatureRead")
         
-        print("pushSetTempControllo TemperatureRead: '")
-        print(dataTemperatureRead)
-        println("'")
+        print("pushSetTempControllo TemperatureRead: '", terminator: "")
+        print(dataTemperatureRead, terminator: "")
+        print("'")
         
         self.lblTemperatura.text = dataTemperatureRead + "°"
     }
@@ -236,11 +242,11 @@ class ViewController: UIViewController {
         self.indicatorUpdateHumidity.hidden = true
 
         // LEGGO IL VALORE DELLA MODALITA' STAGIONALE (INVERNO/ESTATE) ATTIVA
-        var dataReadModalita = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
+        let dataReadModalita = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadModalita")
         
-        print("viewDidLoad ReadModalita: '")
-        print(dataReadModalita)
-        println("'")
+        print("viewDidLoad ReadModalita: '", terminator: "")
+        print(dataReadModalita, terminator: "")
+        print("'")
         
         self.impostaModalita(dataReadModalita)
         
@@ -248,11 +254,11 @@ class ViewController: UIViewController {
         self.indicatorTempControllo.hidden = false
         self.indicatorTempControllo.startAnimating()
 
-        var dataTempControllo = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadTempControl")
+        let dataTempControllo = inviaRichiestaHTTP("http://" + arduinoAddress + ":" + arduinoPort + "/index.htm?ReadTempControl")
         
-        print("viewDidLoad TempControllo: '")
-        print(dataTempControllo)
-        println("'")
+        print("viewDidLoad TempControllo: '", terminator: "")
+        print(dataTempControllo, terminator: "")
+        print("'")
         
         self.txtTempControllo.text = dataTempControllo
         
